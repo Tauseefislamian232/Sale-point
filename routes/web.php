@@ -78,7 +78,11 @@ Route::get('product-forceDelete/{id}', [ProductController::class, 'product_force
 
 
 Route::get('product-listing/{id?}', [ProductlistingController::class, 'product_listing'])->name('product-listing');
-Route::get('add-to-cart/{id}', [ProductlistingController::class, 'addToCart'])->name('add.to.cart');
+// Route::get('add-to-cart/{id}', [ProductlistingController::class, 'addToCart'])->name('add.to.cart');
+// Route::post('add-to-cart/{id}', [ProductlistingController::class, 'edit'])->name('add.to.cart');
+Route::get('add-to-cart/{id}', [ProductlistingController::class, 'edit']);
+// Route::post('edit-book/{id}', [ProductlistingController::class, 'edit']);
 Route::get('cart', [ProductlistingController::class, 'cart'])->name('cart');
 Route::patch('update-cart', [ProductlistingController::class, 'update'])->name('update.cart');
 Route::delete('remove-from-cart', [ProductlistingController::class, 'remove'])->name('remove.from.cart');
+Route::post('place-order', [ProductlistingController::class, 'place_order'])->name('place-order');

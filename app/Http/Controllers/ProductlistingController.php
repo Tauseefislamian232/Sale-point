@@ -24,8 +24,10 @@ class ProductlistingController extends Controller
         return view('admin-panel.products.product_listing', compact('products', 'category', 'records'));
     }
 
-    public function addToCart($id)
+    public function edit($id)
     {
+        // $where = array('id' => $request->id);
+        // $book  = Product::where($id)->first();
         $product = Product::findOrFail($id);
         // dd($product);
         $cart = session()->get('cart', []);
@@ -35,6 +37,7 @@ class ProductlistingController extends Controller
         } else {
             $cart[$id] = [
                 "name" => $product->name,
+                "product_id" => $product->id,
                 "quantity" => 1,
                 "price" => $product->price,
                 "cat_id" => $product->cat_id,
@@ -44,9 +47,38 @@ class ProductlistingController extends Controller
             ];
         }
 
-        session()->put('cart', $cart);
-        return redirect()->back()->with('success', 'Product added to cart successfully!');
+        $cart = session()->put(
+            'cart',
+            $cart
+        );
+        // return redirect()->back()->with('success', 'Product added to cart successfully!');
+        // dd($book);
+        return session()->get('cart');
     }
+    // public function addToCart($id)
+    // {
+    //     $product = Product::findOrFail($id);
+    //     // dd($product);
+    //     $cart = session()->get('cart', []);
+
+    //     if (isset($cart[$id])) {
+    //         $cart[$id]['quantity']++;
+    //     } else {
+    //         $cart[$id] = [
+    //             "name" => $product->name,
+    //             "product_id" => $product->id,
+    //             "quantity" => 1,
+    //             "price" => $product->price,
+    //             "cat_id" => $product->cat_id,
+    //             "subcat_id" => $product->subcat_id,
+    //             "is_drink" => $product->is_drink,
+    //             "image" => $product->image
+    //         ];
+    //     }
+
+    //     session()->put('cart', $cart);
+    //     return redirect()->back()->with('success', 'Product added to cart successfully!');
+    // }
     public function cart()
     {
         $products = Product::get();
@@ -73,5 +105,10 @@ class ProductlistingController extends Controller
             }
             session()->flash('success', 'Product removed successfully');
         }
+    }
+
+    public function place_order(Request $request)
+    {
+        dd($request->all());
     }
 }

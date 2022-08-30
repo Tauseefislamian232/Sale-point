@@ -1,8 +1,8 @@
- <header id="page-topbar">
+ <header id="page-topbar mb-1">
      <div class="navbar-header">
          <div class="d-flex">
              <!-- LOGO -->
-             <div class="navbar-brand-box">
+             <div class="navbar-brand-box sticky-top">
                  <a href="index.html" class="logo logo-dark">
                      <span class="logo-sm">
                          {{-- <img src="{{asset('assets/images/logo.svg')}}" alt="" height="22"> --}}
