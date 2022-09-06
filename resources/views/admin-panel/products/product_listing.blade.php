@@ -478,9 +478,7 @@
                                 html += '<td data-th="Subtotal" class="text-center">';
                                 html += value.price * value.quantity;
                                 html +=
-                                    ' <input type="hidden" name="subtotal[]" id="subtotal" value="{{ $details['price'] * $details['quantity'] }}">';
-                                html +=
-                                    '<input type="hidden" name="subtotal[]" id="subtotal" value="'+value.price * value.quantity+'">';
+                                    '<input type="hidden" name="subtotal[]" id="subtotal" value="'+value.sub_total+'">';
                                 html += '</td>';
                                 html += '<td class="actions" data-th="">';
                                 html +=

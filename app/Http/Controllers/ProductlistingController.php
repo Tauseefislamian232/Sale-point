@@ -43,7 +43,9 @@ class ProductlistingController extends Controller
                 "cat_id" => $product->cat_id,
                 "subcat_id" => $product->subcat_id,
                 "is_drink" => $product->is_drink,
-                "image" => $product->image
+                "image" => $product->image,
+                "sub_total" => $product->price * $product->quantity
+
             ];
         }
 

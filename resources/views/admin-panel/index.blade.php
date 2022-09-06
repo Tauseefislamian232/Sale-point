@@ -43,7 +43,7 @@
     <script src="{{ asset('assets/libs/node-waves/waves.min.js') }}"></script>
 
     <!-- apexcharts -->
-    {{-- <script src="{{ asset('assets/libs/apexcharts/apexcharts.min.js') }}"></script> --}}
+    <script src="{{ asset('assets/libs/apexcharts/apexcharts.min.js') }}"></script>
 
     <!-- dashboard init -->
     <script src="{{ asset('assets/js/pages/dashboard.init.js ') }}"></script>
@@ -60,7 +60,7 @@
          <!-- Required datatable js -->
         <script src="{{asset('assets/libs/datatables.net/js/jquery.dataTables.min.js')}}"></script>
         <script src="{{asset('assets/libs/datatables.net-bs4/js/dataTables.bootstrap4.min.js')}}"></script>
-
+    
 
  {{-- toastr js --}}
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.0.1/js/toastr.js"></script>
