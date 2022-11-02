@@ -24,16 +24,19 @@ class ProductlistingController extends Controller
         return view('admin-panel.products.product_listing', compact('products', 'category', 'records'));
     }
 
-    public function edit($id)
+    public function add_to_cart($id)
     {
         // $where = array('id' => $request->id);
         // $book  = Product::where($id)->first();
         $product = Product::findOrFail($id);
         // dd($product);
+        // return $product;
         $cart = session()->get('cart', []);
-
+        // dd($cart);
         if (isset($cart[$id])) {
             $cart[$id]['quantity']++;
+            // dd($cart[$id]['quantity']++);
+          
         } else {
             $cart[$id] = [
                 "name" => $product->name,
@@ -53,6 +56,7 @@ class ProductlistingController extends Controller
             'cart',
             $cart
         );
+        // dd($cart);
         // return redirect()->back()->with('success', 'Product added to cart successfully!');
         // dd($book);
         return session()->get('cart');
@@ -99,6 +103,7 @@ class ProductlistingController extends Controller
 
     public function remove(Request $request)
     {
+        // dd($request->all());
         if ($request->id) {
             $cart = session()->get('cart');
             if (isset($cart[$request->id])) {
@@ -106,6 +111,18 @@ class ProductlistingController extends Controller
                 session()->put('cart', $cart);
             }
             session()->flash('success', 'Product removed successfully');
+        }
+    }
+    public function remove_ajax(Request $request)
+    {
+        // dd($request->all());
+        if ($request->id) {
+            $cart = session()->get('cart');
+            if (isset($cart[$request->id])) {
+                unset($cart[$request->id]);
+                session()->put('cart', $cart);
+            }
+            session()->reflash('success', 'Product removed successfully');
         }
     }
 

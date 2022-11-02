@@ -30,12 +30,12 @@
              </button>
 
              <!-- App Search-->
-             <form class="app-search d-none d-lg-block">
+             {{-- <form class="app-search d-none d-lg-block">
                  <div class="position-relative">
                      <input type="text" class="form-control" placeholder="Search...">
                      <span class="bx bx-search-alt"></span>
                  </div>
-             </form>
+             </form> --}}
 
 
          </div>
@@ -66,7 +66,7 @@
              </div>
 
              <div class="dropdown d-inline-block">
-                 <button type="button" class="btn header-item waves-effect" data-bs-toggle="dropdown"
+                 {{-- <button type="button" class="btn header-item waves-effect" data-bs-toggle="dropdown"
                      aria-haspopup="true" aria-expanded="false">
                      <img id="header-lang-img" src="{{asset('assets/images/flags/us.jpg')}}" alt="Header Language" height="16">
                  </button>
@@ -100,11 +100,11 @@
                          <img src="{{asset('assets/images/flags/russia.jpg')}}" alt="user-image" class="me-1" height="12">
                          <span class="align-middle">Russian</span>
                      </a>
-                 </div>
+                 </div> --}}
              </div>
 
              <div class="dropdown d-none d-lg-inline-block ms-1">
-                 <button type="button" class="btn header-item noti-icon waves-effect" data-bs-toggle="dropdown"
+                 {{-- <button type="button" class="btn header-item noti-icon waves-effect" data-bs-toggle="dropdown"
                      aria-haspopup="true" aria-expanded="false">
                      <i class="bx bx-customize"></i>
                  </button>
@@ -152,7 +152,7 @@
                              </div>
                          </div>
                      </div>
-                 </div>
+                 </div> --}}
              </div>
 
              <div class="dropdown d-none d-lg-inline-block ms-1">
@@ -162,7 +162,7 @@
              </div>
 
              <div class="dropdown d-inline-block">
-                 <button type="button" class="btn header-item noti-icon waves-effect"
+                 {{-- <button type="button" class="btn header-item noti-icon waves-effect"
                      id="page-header-notifications-dropdown" data-bs-toggle="dropdown" aria-haspopup="true"
                      aria-expanded="false">
                      <i class="bx bx-bell bx-tada"></i>
@@ -255,7 +255,7 @@
                                  More..</span>
                          </a>
                      </div>
-                 </div>
+                 </div> --}}
              </div>
 
              <div class="dropdown d-inline-block">
@@ -267,39 +267,34 @@
                      <i class="mdi mdi-chevron-down d-none d-xl-inline-block"></i>
                  </button>
                  <div class="dropdown-menu dropdown-menu-end">
-                     <!-- item-->
-                     <a class="dropdown-item" href="#"><i
-                             class="bx bx-user font-size-16 align-middle me-1"></i> <span
-                             key="t-profile">Profile</span></a>
-                     <a class="dropdown-item" href="#"><i
-                             class="bx bx-wallet font-size-16 align-middle me-1"></i> <span key="t-my-wallet">My
-                             Wallet</span></a>
-                     <a class="dropdown-item d-block" href="#"><span
-                             class="badge bg-success float-end">11</span><i
-                             class="bx bx-wrench font-size-16 align-middle me-1"></i> <span
-                             key="t-settings">Settings</span></a>
-                     <a class="dropdown-item" href="#"><i
-                             class="bx bx-lock-open font-size-16 align-middle me-1"></i> <span
-                             key="t-lock-screen">Lock screen</span></a>
-                     <div class="dropdown-divider"></div>
-                     <a class="dropdown-item text-danger" href="{{ route('logout') }}"
-                         onclick="event.preventDefault();
-                        document.getElementById('logout-form').submit();">
+                    <!-- item-->
+                    @php
+                    $id = Auth::user()->id;
+                    @endphp
+                    <a class="dropdown-item" href="{{ url('profile/'.$id) }}">
+                        <i class="bx bx-user font-size-16 align-middle me-1">
 
-                         <i class="bx bx-power-off font-size-16 align-middle me-1 text-danger"></i> <span
-                             key="t-logout">Logout</span>
-                         <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                             @csrf
-                         </form>
-                     </a>
+                        </i>
+                        <span key="t-profile">Profile</span>
+                    </a>
 
-                 </div>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item text-danger" href="{{ route('logout') }}"
+                        onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                        <i class="bx bx-power-off font-size-16 align-middle me-1 text-danger">
+                        </i>
+                        <span key="t-logout">Logout</span>
+                        <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                            @csrf
+                        </form>
+                    </a>
+                </div>
              </div>
 
              <div class="dropdown d-inline-block">
-                 <button type="button" class="btn header-item noti-icon right-bar-toggle waves-effect">
+                 {{-- <button type="button" class="btn header-item noti-icon right-bar-toggle waves-effect">
                      <i class="bx bx-cog bx-spin"></i>
-                 </button>
+                 </button> --}}
              </div>
 
              {{-- cart dropdown --}}

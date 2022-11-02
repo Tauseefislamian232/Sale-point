@@ -1,9 +1,7 @@
 @extends('admin-panel.full_view')
 
 @section('content')
-    {{-- <div class="main-content"> --}}
 
-    {{-- <div class="page-content"> --}}
     <div class="container-fluid">
         <!-- start page title -->
         <div class="row">
@@ -56,11 +54,11 @@
                                             <tr data-id="{{ $id }}">
                                                 <td data-th="Product">
                                                     <div class="row">
-                                                        <div class="col-sm-2 hidden-xs">
+                                                        <div class="col hidden-xs">
                                                             <img src="{{ asset('uploads/products/' . $details['image']['image']) }}"
                                                                 width="50" height="50" class="img-responsive" />
                                                         </div>
-                                                        <div class="col-sm-4">
+                                                        <div class="col">
                                                             <h6 class="nomargin">
                                                                 <input type="text" name="name[]"
                                                                     value=" {{ $details['name'] }}" style="border: none"
@@ -69,22 +67,22 @@
                                                                     value="{{ $details['product_id'] }}">
                                                             </h6>
                                                         </div>
-                                                        <div class="col-sm-2">
+                                                        <div class="col">
                                                             <p class="nomargin">
                                                                 <input type="text" name="cat_id[]"
                                                                     value=" {{ $details['cat_id'] }}" style="border: none"
                                                                     size="1">
                                                             </p>
                                                         </div>
-                                                        <div class="col-sm-2">
+                                                        <div class="col">
                                                             <p class="nomargin">
                                                                 <input type="text" name="subcat_id[]"
                                                                     value=" {{ $details['subcat_id'] }}"
                                                                     style="border: none" size="1">
                                                             </p>
                                                         </div>
-                                                        <div class="col-sm-2 text-center">
-                                                            {{-- {{ $details['is_drink'] }} --}}
+                                                        <div class="col text-center">
+
                                                             @if ($details['is_drink'] == 1)
                                                                 <p class="nomargin ">
 
@@ -107,14 +105,14 @@
                                                     </div>
                                                 </td>
                                                 <td data-th="Price" class="text-center">
-                                                    {{-- Rs.{{ $details['price'] }} --}}
+
                                                     <input type="text" name="price[]" value=" {{ $details['price'] }}"
                                                         style="border: none" size="2">
                                                 </td>
                                                 <td data-th="Quantity">
-                                                    <input type="number" name="quantity[]"
+                                                    <input type="number" name="quantity[]" id="qty_upper"
                                                         value="{{ $details['quantity'] }}"
-                                                        class="form-control quantity update-cart" />
+                                                        class="form-control quantity update-cart qty_upper" />
                                                 </td>
                                                 <td data-th="Subtotal" class="text-center">
                                                     Rs.{{ $details['price'] * $details['quantity'] }}
@@ -128,9 +126,10 @@
                                             </tr>
                                         @endforeach
                                 @endif
+
                             </tbody>
 
-                            {{-- </form> --}}
+
                         </table>
                     </div>
                     <tfoot>
@@ -141,8 +140,7 @@
                                     <td colspan="5" class="text-right   ">
                                         <h3>
                                             <strong>Total Rs.{{ $total }}</strong>
-                                            <input type="hidden" name="total" id="total"
-                                                value="{{ $total }}">
+                                            <input type="hidden" name="total" id="total" value="{{ $total }}">
                                         </h3>
                                     </td>
                                 </tr>
@@ -197,7 +195,7 @@
                                                 {{-- data-aos="fade-up" data-aos-delay="100" --}}>
                                                 <p class="position-static text-left bold">{{ $item->name }}
                                                 </p>
-                                                <a href="#" class="continue" id="edit"
+                                                <a href="#" class="continue" id="add-to-cart"
                                                     data-id="{{ $item->id }}">
                                                     {{-- <a href="{{ route('add.to.cart', $item->id) }}"> --}}
                                                     <img src="{{ asset('uploads/products/' . $item->image->image) }}"
@@ -327,175 +325,214 @@
                 </div>
             </div>
         </div>
-        {{-- </div> --}}
-        {{-- </div> --}}
 
-        {{-- ajax code for cart --}}
         <script type="text/javascript">
-            $(".update-cart").change(function(e) {
-                e.preventDefault();
+            $(document).ready(function() {
+                // console.log("ready!");
 
-                var ele = $(this);
 
-                $.ajax({
-                    url: '{{ route('update.cart') }}',
-                    method: "patch",
-                    data: {
-                        _token: '{{ csrf_token() }}',
-                        id: ele.parents("tr").attr("data-id"),
-                        quantity: ele.parents("tr").find(".quantity").val()
-                    },
-                    success: function(response) {
-                        window.location.reload();
-                    }
-                });
+                $(".update-cart").change(function(e) {
+                    e.preventDefault();
 
-            });
+                    var ele = $(this);
 
-            $(".remove-from-cart").click(function(e) {
-                e.preventDefault();
-
-                var ele = $(this);
-
-                if (confirm("Are you sure want to remove?")) {
                     $.ajax({
-                        url: '{{ route('remove.from.cart') }}',
-                        method: "DELETE",
+                        url: '{{ route('update.cart') }}',
+                        method: "patch",
                         data: {
                             _token: '{{ csrf_token() }}',
-                            id: ele.parents("tr").attr("data-id")
+                            id: ele.parents("tr").attr("data-id"),
+                            quantity: ele.parents("tr").find(".quantity").val()
                         },
                         success: function(response) {
                             window.location.reload();
                         }
                     });
-                }
-            });
 
-            // calcualte function in js
-            $("#discount").blur(function() {
-                var num1 = document.getElementById("total").value;
-                // alert(num1);
-                var num2 = document.getElementById("discount").value;
-                var num2 = num2 / 100;
-                // alert(num2);
-                var disc = num1 * num2;
-                // alert(disc);
-                var net_total = num1 - disc;
-                // document.getElementById("total_disc").value = disc;
-                $("#total_disc").val(disc);
-                //  alert(a);
-                document.getElementById('net_total').value = net_total;
-            });
-            $("#charges").blur(function() {
-
-                var a = document.getElementById("charges").value;
-                // alert(num3);
-                var b = document.getElementById('net_total').value;
-                var c = parseInt(a, 10) + parseInt(b, 10);
-                // alert(c);
-                document.getElementById("net_total").value = c;
-
-            });
-
-            // reset form
-            $(document).ready(function() {
-                $(".reset-btn").click(function() {
-                    $("#myForm").trigger("reset");
                 });
-            });
-        </script>
 
-        <script type="text/javascript">
-            $(document).ready(function($) {
-                $.ajaxSetup({
-                    headers: {
-                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                $(".remove-from-cart").click(function(e) {
+                    e.preventDefault();
+
+                    var ele = $(this);
+                    alert(ele);
+                    if (confirm("Are you sure want to remove?")) {
+                        $.ajax({
+                            url: '{{ route('remove.from.cart') }}',
+                            method: "DELETE",
+                            data: {
+                                _token: '{{ csrf_token() }}',
+                                id: ele.parents("tr").attr("data-id")
+                            },
+                            success: function(response) {
+                                window.location.reload();
+                            }
+                        });
                     }
                 });
 
-                $('body').on('click', '#edit', function() {
-                    var id = $(this).data('id');
-                    // alert(id);
-                    // ajax
-                    var html = "";
-                    $.ajax({
-                        type: "GET",
-                        url: "{{ url('/add-to-cart') }}/" + id,
-                        data: {
-                            id: id
-                        },
-                        dataType: 'json',
-                        success: function(res) {
-                            $.each(res, function(key, value) {
-                                html += '<tr data-id="'+value.id+'">';
-                                html += '<td data-th="Product">';
-                                html += '<div class="row">';
-                                html += '<div class="col-sm-2 hidden-xs">';
-                                html +=
-                                    '<img src="http://127.0.0.1:8000/uploads/products/'+value.image.image+'" width="50" height="50" class="img-responsive">';
-                                html += '</div>';
-                                html += '<div class="col-sm-4">';
-                                html += '<h6 class="nomargin">';
-                                html +=
-                                    '<input type="text" name="name[]" value="'+value.name+'" style="border: none" size="10">';
-                                html +=
-                                    '<input type="hidden" name="product_id[]" value="'+value.product_id+'">';
-                                html += '</h6>';
-                                html += '</div>';
-                                html += '<div class="col-sm-2">';
-                                html += '<p class="nomargin">';
-                                html +=
-                                    '<input type="text" name="cat_id[]" value="'+value.cat_id+'" style="border: none" size="1">';
-                                html += '</p>';
-                                html += '</div>';
-                                html += '<div class="col-sm-2">';
-                                html += '<p class="nomargin">';
-                                html +=
-                                    '<input type="text" name="subcat_id[]" value="'+value.subcat_id+'" style="border: none" size="1">';
-                                html += '</p>';
-                                html += '</div>';
-                                html += '<div class="col-sm-2 text-center">';
-
-                                html += ' <p class="nomargin ">';
-
-                                html +=
-                                    ' <i class="fas fa-hamburger"> <input type="hidden" name="is_drink[]" value="'+value.is_drink+'" style="border: none" size="1"></i>';
-                                html += '</p>';
-                                html += '</div>';
-
-                                html += '</div>';
-                                html += '</td>';
-                                html += '<td data-th="Price" class="text-center">';
-
-                                html +=
-                                    '<input type="text" name="price[]" value="'+value.price+'" style="border: none" size="2">';
-                                html += '</td>';
-                                html += '<td data-th="Quantity">';
-                                html +=
-                                    '<input type="number" name="quantity[]" value="'+value.quantity+'" class="form-control quantity update-cart">';
-                                html += '</td>';
-                                html += '<td data-th="Subtotal" class="text-center">';
-                                html += value.price * value.quantity;
-                                html +=
-                                    '<input type="hidden" name="subtotal[]" id="subtotal" value="'+value.sub_total+'">';
-                                html += '</td>';
-                                html += '<td class="actions" data-th="">';
-                                html +=
-                                    '<button class="btn btn-danger btn-sm remove-from-cart"><i class="fa fa-trash-o"></i></button>';
-                                html += '</td>';
-                                html += '</tr>';
-                            });
-                            $('tbody').html(html);
-                            toastr.success('Added to catalog','Success');
-                            //  window.location.reload();
-                            // $('#id').val(res.id);
-
-                        }
-                    });
-                });
 
             });
+        </script>
+
+        <script>
+            $('body').on('click', '#add-to-cart', function() {
+
+                var product_id = $(this).data('id');
+                alert(product_id);
+                var html = "";
+                var total=0;
+                $.ajax({
+
+                    type: "GET",
+                    dataType: "json",
+                    url: "{{ url('/add-to-cart') }}/" + product_id,
+                    data: {
+                        id: product_id
+                    },
+                    success: function(res) {
+                        // console.log(res.id+res.product_id);
+                        $.each(res, function(key, value) {
+                            total +=  value.sub_total;
+                            alert(total);
+                            html += '<tr data-id="' + value.product_id + '">';
+                            html += '<td data-th="Product">';
+                            html += '<div class="row">';
+                            html += '<div class="col-sm-2 hidden-xs">';
+                            html +=
+                                '<img src="http://127.0.0.1:8000/uploads/products/' + value.image
+                                .image + '" width="50" height="50" class="img-responsive">';
+                            html += '</div>';
+                            html += '<div class="col-sm-4">';
+                            html += '<h6 class="nomargin">';
+                            html +=
+                                '<input type="text" name="name[]" value="' + value.name +
+                                '" style="border: none" size="10">';
+                            html +=
+                                '<input type="hidden" name="product_id[]" value="' + value
+                                .product_id + '">';
+                            html += '</h6>';
+                            html += '</div>';
+                            html += '<div class="col-sm-2">';
+                            html += '<p class="nomargin">';
+                            html +=
+                                '<input type="text" name="cat_id[]" value="' + value.cat_id +
+                                '" style="border: none" size="1">';
+                            html += '</p>';
+                            html += '</div>';
+                            html += '<div class="col-sm-2">';
+                            html += '<p class="nomargin">';
+                            html +=
+                                '<input type="text" name="subcat_id[]" value="' + value.subcat_id +
+                                '" style="border: none" size="1">';
+                            html += '</p>';
+                            html += '</div>';
+                            html += '<div class="col-sm-2 text-center">';
+
+                            html += ' <p class="nomargin ">';
+
+                            html +=
+                                ' <i class="fas fa-hamburger"> <input type="hidden" name="is_drink[]" value="' +
+                                value.is_drink + '" style="border: none" size="1"></i>';
+                            html += '</p>';
+                            html += '</div>';
+
+                            html += '</div>';
+                            html += '</td>';
+                            html += '<td data-th="Price" class="text-center">';
+
+                            html +=
+                                '<input type="text" name="price[]" value="' + value.price +
+                                '" style="border: none" size="2">';
+                            html += '</td>';
+                            html += '<td data-th="Quantity">';
+                            html +=
+                                '<input type="number" id="qty_down" name="quantity[]" value="' +
+                                value.quantity +
+                                '" class="form-control quantity update-cart-ajax">';
+                            html += '</td>';
+                            html += '<td data-th="Subtotal" class="text-center">';
+                            html += value.price * value.quantity;
+                            html +=
+                                '<input type="hidden" name="subtotal[]" id="subtotal-ajax" value="' +
+                                value.sub_total + '">';
+                            html += '</td>';
+                            html += '<td class="actions" data-th="">';
+                            html +=
+                                '<button class="btn btn-danger btn-sm remove-from-cart-ajax" data-id1="' +
+                                value.id + '"><i class="fa fa-trash-o"></i></button>';
+                            // '<button class="btn btn-danger btn-sm remove-from-cart-ajax"><i class="fa fa-trash-o"></i></button>';
+                            html += '</td>';
+                            html += '</tr>';
+
+                        }); //each-loop function closed
+                        $('tbody').html(html);
+                        toastr.success('Added to catalog', 'Success');
+                        //  window.location.reload();
+                        // $('#id').val(res.id);
+
+                    }
+                }); //ajax function closed
+
+            }); // body function closed
+
+            $( window ).on( "load", function(val) {
+               
+                // var selectednumbers = [];
+                var selectednumbers = " ";
+                // $('#subtotalsubtotal-ajax').each(function(i, subtotal) {
+                //     selectednumbers = $(subtotal).val();
+
+                //     // alert(selectednumbers);
+                //     return selectednumbers;
+                // });
+            });
+
+                $('body').on('click', '.remove-from-cart-ajax', function(e) {
+
+                    e.preventDefault();
+                    // alert(1);
+                    var ele = $(this);
+                    // var status = $(element).parents('td').parents('tr').find('.dropdown_status').val();
+                    // alert(idd);
+
+                    if (confirm("Are you sure want to remove?")) {
+                        $.ajax({
+                            url: '{{ route('remove.from.cart.ajax') }}',
+                            method: "DELETE",
+                            data: {
+                                _token: '{{ csrf_token() }}',
+                                id: ele.parents("tr").attr("data-id")
+                            },
+                            success: function(response) {
+                                window.location.reload();
+                            }
+                        });
+                    }
+                });
+
+
+                $('body').on('change', '.update-cart-ajax', function(e) {
+
+                    e.preventDefault();
+                    // alert('ajax-updated');
+                    var ele = $(this);
+
+                    $.ajax({
+                        url: '{{ route('update.cart') }}',
+                        method: "patch",
+                        data: {
+                            _token: '{{ csrf_token() }}',
+                            id: ele.parents("tr").attr("data-id"),
+                            quantity: ele.parents("tr").find(".quantity").val()
+                        },
+                        success: function(response) {
+                            window.location.reload();
+                        }
+                    });
+
+
+                });
         </script>
 
     @endsection

@@ -2,13 +2,14 @@
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CustomerController;
-use App\Http\Controllers\OrderController;
-use App\Http\Controllers\ProductlistingController;
 use App\Http\Controllers\SubcategoryController;
+use App\Http\Controllers\ProductlistingController;
 
 /*
 |--------------------------------------------------------------------------
@@ -29,6 +30,16 @@ Auth::routes();
 
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('/');
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+// user profile related datas
+Route::post('update-user/{id}', [HomeController::class, 'update_user']);
+Route::get('profile/{id}', [HomeController::class, 'profile']);
+Route::get('/changePassword', [App\Http\Controllers\HomeController::class, 'showChangePasswordGet'])->name('changePasswordGet');
+Route::post('/changePassword', [App\Http\Controllers\HomeController::class, 'changePasswordPost'])->name('changePasswordPost');
+Route::get('forget-password', [ForgotPasswordController::class, 'ForgetPassword'])->name('ForgetPasswordGet');
+Route::post('forget-password', [ForgotPasswordController::class, 'ForgetPasswordStore'])->name('ForgetPasswordPost');
+Route::get('reset-password/{token}', [ForgotPasswordController::class, 'ResetPassword'])->name('ResetPasswordGet');
+Route::post('reset-password', [ForgotPasswordController::class, 'ResetPasswordStore'])->name('ResetPasswordPost');
+
 //demo listing
 Route::get('/demo-listing', [ProductlistingController::class, 'demo_listing'])->name('demo-listing');
 //Admin Routes
@@ -80,9 +91,11 @@ Route::get('product-forceDelete/{id}', [ProductController::class, 'product_force
 Route::get('product-listing/{id?}', [ProductlistingController::class, 'product_listing'])->name('product-listing');
 // Route::get('add-to-cart/{id}', [ProductlistingController::class, 'addToCart'])->name('add.to.cart');
 // Route::post('add-to-cart/{id}', [ProductlistingController::class, 'edit'])->name('add.to.cart');
-Route::get('add-to-cart/{id}', [ProductlistingController::class, 'edit']);
+Route::get('add-to-cart/{id}', [ProductlistingController::class, 'add_to_cart']);
 // Route::post('edit-book/{id}', [ProductlistingController::class, 'edit']);
 Route::get('cart', [ProductlistingController::class, 'cart'])->name('cart');
 Route::patch('update-cart', [ProductlistingController::class, 'update'])->name('update.cart');
-Route::delete('remove-from-cart', [ProductlistingController::class, 'remove'])->name('remove.from.cart');
 Route::post('place-order', [ProductlistingController::class, 'place_order'])->name('place-order');
+Route::delete('remove-from-cart', [ProductlistingController::class, 'remove'])->name('remove.from.cart');
+Route::delete('remove-from-cart-ajax', [ProductlistingController::class, 'remove_ajax'])->name('remove.from.cart.ajax');
+
