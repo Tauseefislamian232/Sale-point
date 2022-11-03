@@ -8,7 +8,7 @@
             <div class="head text-center mt-1">
                 <div class="row">
                     <div class="col-md-6">
-                        <h4 class="mb-3 text-dark">
+                        <h5 class="mb-1 text-dark">
                             Products Cart Details
                             {{-- <a href="{{ route('cart') }}"> --}}
                             <a href="#">
@@ -19,7 +19,7 @@
                         </h4>
                     </div>
                     <div class="col-md-6">
-                        <h4 class="mb-3 text-dark">
+                        <h4 class="mb-1 text-dark">
                             Product Listing Page
                         </h4>
                     </div>
@@ -29,7 +29,7 @@
             <!-- end col -->
             <div class="col-md-6">
                 <div class="card">
-                    <div class="card-body overflow-auto" style="height: 520px;">
+                    <div class="card-body overflow-auto" style="height:320px;">
                         <!--write your code here  -->
                         <table id="cart" id="myScrollspy"
                             class="table table-hover dt-responsive nowrap w-100  text-center table-sm">
@@ -159,7 +159,7 @@
 
             <div class="col-md-6">
                 <div class="card">
-                    <div class="card-body overflow-auto" style="height: 650px;">
+                    <div class="card-body overflow-auto" style="height:435px;">
                         <ul class="nav nav-tabs nav-tabs-custom nav-justified" role="tablist">
                             <li class="nav-item">
                                 <a class="nav-link active" data-bs-toggle="tab" href="#" role="tab">
