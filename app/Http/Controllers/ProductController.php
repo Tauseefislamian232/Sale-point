@@ -14,8 +14,8 @@ class ProductController extends Controller
     public function add_product()
     {
         $category = Category::all();
-        $data = Product::get();
-
+        $data = Product::with('product_with_category')->get();
+        dd($data);
         return view('admin-panel.products.create_product', compact('data', 'category'));
     }
 

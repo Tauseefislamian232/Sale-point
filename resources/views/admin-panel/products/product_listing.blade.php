@@ -115,9 +115,9 @@
                                                         class="form-control quantity update-cart qty_upper" />
                                                 </td>
                                                 <td data-th="Subtotal" class="text-center">
-                                                    Rs.{{ $details['price'] * $details['quantity'] }}
-                                                    <input type="hidden" name="subtotal[]" id="subtotal"
-                                                        value="{{ $details['price'] * $details['quantity'] }}">
+                                                    {{-- Rs.{{ $details['price'] * $details['quantity'] }} --}}
+                                                    <input type="number" name="subtotal[]" id="subtotal" disabled
+                                                        value="{{ $details['price'] * $details['quantity'] }}" class="form-control">
                                                 </td>
                                                 <td class="actions" data-th="">
                                                     <button class="btn btn-danger btn-sm remove-from-cart"><i
@@ -140,13 +140,16 @@
                                     <td colspan="5" class="text-right   ">
                                         <h3>
                                             {{-- <strong id="total_rs">Total Rs.{{ $total }}</strong> --}}
-                                            <input type="hidden" name="total" id="total" value="{{ $total }}">
-                                            <strong>Total Rs. <input type="text" id="total_rupees" name="total_rupees" value="{{ $total }}" class="col-3 text-center" disabled></strong>
+                                            <input type="hidden" name="total" id="total"
+                                                value="{{ $total }}">
+                                            <strong>Total Rs. <input type="text" id="total_rupees" name="total_rupees"
+                                                    value="{{ $total }}" class="col-3 text-center"
+                                                    disabled></strong>
                                             {{-- <input type="text" name="total_rupees" id="total_rupees" value=""> --}}
                                         </h3>
                                     </td>
                                 </tr>
-                               
+
                             </div>
                         </div>
                     </tfoot>
@@ -377,7 +380,7 @@
                 var product_id = $(this).data('id');
                 // alert(product_id);
                 var html = "";
-                var total=0;
+                var total = 0;
                 $.ajax({
 
                     type: "GET",
@@ -388,9 +391,9 @@
                     },
                     success: function(res) {
                         // console.log(res.id+res.product_id);
-                        total_amount =0 ;
+                        total_amount = 0;
                         $.each(res, function(key, value) {
-                            
+
                             html += '<tr data-id="' + value.product_id + '">';
                             html += '<td data-th="Product">';
                             html += '<div class="row">';
@@ -451,7 +454,8 @@
                             // html += value.price * value.quantity;
                             html +=
                                 '<input type="text" disabled name="subtotal[]" id="subtotal-ajax" value="' +
-                                value.price * value.quantity + '" class="form-control subtotal-ajax">';
+                                value.price * value.quantity +
+                                '" class="form-control subtotal-ajax">';
                             html += '</td>';
                             html += '<td class="actions" data-th="">';
                             html +=
@@ -460,7 +464,8 @@
                             // '<button class="btn btn-danger btn-sm remove-from-cart-ajax"><i class="fa fa-trash-o"></i></button>';
                             html += '</td>';
                             html += '</tr>';
-                        //    alert(sum_total_amount= total_amount += value.price * value.quantity);
+
+                            sum_total_amount = total_amount += value.price * value.quantity;
                             return sum_total_amount;
                         }); //each-loop function closed
                         $('tbody').html(html);
@@ -481,53 +486,53 @@
 
             }); // body function closed
 
-            
-
-                $('body').on('click', '.remove-from-cart-ajax', function(e) {
-
-                    e.preventDefault();
-                    // alert(1);
-                    var ele = $(this);
-                    // var status = $(element).parents('td').parents('tr').find('.dropdown_status').val();
-                    // alert(idd);
-
-                    if (confirm("Are you sure want to remove?")) {
-                        $.ajax({
-                            url: '{{ route('remove.from.cart.ajax') }}',
-                            method: "DELETE",
-                            data: {
-                                _token: '{{ csrf_token() }}',
-                                id: ele.parents("tr").attr("data-id")
-                            },
-                            success: function(response) {
-                                window.location.reload();
-                            }
-                        });
-                    }
-                });
 
 
-                $('body').on('change', '.update-cart-ajax', function(e) {
+            $('body').on('click', '.remove-from-cart-ajax', function(e) {
 
-                    e.preventDefault();
-                    // alert('ajax-updated');
-                    var ele = $(this);
+                e.preventDefault();
+                // alert(1);
+                var ele = $(this);
+                // var status = $(element).parents('td').parents('tr').find('.dropdown_status').val();
+                // alert(idd);
 
+                if (confirm("Are you sure want to remove?")) {
                     $.ajax({
-                        url: '{{ route('update.cart') }}',
-                        method: "patch",
+                        url: '{{ route('remove.from.cart.ajax') }}',
+                        method: "DELETE",
                         data: {
                             _token: '{{ csrf_token() }}',
-                            id: ele.parents("tr").attr("data-id"),
-                            quantity: ele.parents("tr").find(".quantity").val()
+                            id: ele.parents("tr").attr("data-id")
                         },
                         success: function(response) {
                             window.location.reload();
                         }
                     });
+                }
+            });
 
 
+            $('body').on('change', '.update-cart-ajax', function(e) {
+
+                e.preventDefault();
+                // alert('ajax-updated');
+                var ele = $(this);
+
+                $.ajax({
+                    url: '{{ route('update.cart') }}',
+                    method: "patch",
+                    data: {
+                        _token: '{{ csrf_token() }}',
+                        id: ele.parents("tr").attr("data-id"),
+                        quantity: ele.parents("tr").find(".quantity").val()
+                    },
+                    success: function(response) {
+                        window.location.reload();
+                    }
                 });
+
+
+            });
         </script>
 
     @endsection

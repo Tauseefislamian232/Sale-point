@@ -17,12 +17,12 @@ class Product extends Model
         'name', 'cat_id', 'subcat_id', 'price', 'quantity', 'is_drink'
     ];
 
-    public function category()
+    public function product_with_category()
     {
         return $this->belongsTo(Category::class, 'cat_id', 'id');
     }
 
-    public function subcategory()
+    public function product_with_subcategory()
     {
         return $this->belongsTo(Subcategory::class, 'subcat_id', 'id');
     }
