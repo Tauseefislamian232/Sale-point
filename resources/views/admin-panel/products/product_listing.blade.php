@@ -6,14 +6,14 @@
         <!-- start page title -->
         <div class="row">
             <div class="head text-center mt-1">
-                <div class="row">
+                <div class="row m-2">
                     <div class="col-md-6">
-                        <h5 class="mb-1 text-dark">
+                        <h4 class="mb-1 text-dark">
                             Products Cart Details
                             {{-- <a href="{{ route('cart') }}"> --}}
                             <a href="#">
                                 <i class="fa fa-shopping-cart text-danger" aria-hidden="true"></i>
-                                <span class="badge badge-pill badge-light">
+                                <span class="badge badge-pill badge-light bg-dark">
                                     {{ count((array) session('cart')) }}</span>
                             </a>
                         </h4>
@@ -139,18 +139,14 @@
                                 <tr>
                                     <td colspan="5" class="text-right   ">
                                         <h3>
-                                            <strong>Total Rs.{{ $total }}</strong>
+                                            {{-- <strong id="total_rs">Total Rs.{{ $total }}</strong> --}}
                                             <input type="hidden" name="total" id="total" value="{{ $total }}">
+                                            <strong>Total Rs. <input type="text" id="total_rupees" name="total_rupees" value="{{ $total }}" class="col-3 text-center" disabled></strong>
+                                            {{-- <input type="text" name="total_rupees" id="total_rupees" value=""> --}}
                                         </h3>
                                     </td>
                                 </tr>
-                                {{-- <tr>
-                                            <td colspan="5" class="text-right">
-                                                <a href="{{ url('product-listing') }}" class="btn btn-warning"><i
-                                                        class="fa fa-angle-left"></i> Continue Shopping</a>
-                                                <button class="btn btn-success">Place Order</button>
-                                            </td>
-                                        </tr> --}}
+                               
                             </div>
                         </div>
                     </tfoot>
@@ -355,7 +351,7 @@
                     e.preventDefault();
 
                     var ele = $(this);
-                    alert(ele);
+                    // alert(ele);
                     if (confirm("Are you sure want to remove?")) {
                         $.ajax({
                             url: '{{ route('remove.from.cart') }}',
@@ -379,7 +375,7 @@
             $('body').on('click', '#add-to-cart', function() {
 
                 var product_id = $(this).data('id');
-                alert(product_id);
+                // alert(product_id);
                 var html = "";
                 var total=0;
                 $.ajax({
@@ -407,7 +403,7 @@
                             html += '<h6 class="nomargin">';
                             html +=
                                 '<input type="text" name="name[]" value="' + value.name +
-                                '" style="border: none" size="10">';
+                                '" style="border: none" size="12">';
                             html +=
                                 '<input type="hidden" name="product_id[]" value="' + value
                                 .product_id + '">';
@@ -452,21 +448,24 @@
                                 '" class="form-control quantity update-cart-ajax">';
                             html += '</td>';
                             html += '<td data-th="Subtotal" class="text-center">';
-                            html += value.price * value.quantity;
+                            // html += value.price * value.quantity;
                             html +=
-                                '<input type="text" name="subtotal[]" id="subtotal-ajax" value="' +
-                                value.price * value.quantity + '">';
+                                '<input type="text" disabled name="subtotal[]" id="subtotal-ajax" value="' +
+                                value.price * value.quantity + '" class="form-control subtotal-ajax">';
                             html += '</td>';
                             html += '<td class="actions" data-th="">';
                             html +=
                                 '<button class="btn btn-danger btn-sm remove-from-cart-ajax" data-id1="' +
-                                value.id + '"><i class="fa fa-trash-o"></i></button><input type="text" name="total_amount" value="total_amount">';
+                                value.id + '"><i class="fa fa-trash-o"></i></button>';
                             // '<button class="btn btn-danger btn-sm remove-from-cart-ajax"><i class="fa fa-trash-o"></i></button>';
                             html += '</td>';
                             html += '</tr>';
-
+                        //    alert(sum_total_amount= total_amount += value.price * value.quantity);
+                            return sum_total_amount;
                         }); //each-loop function closed
                         $('tbody').html(html);
+                        $('#total_rupees').val(sum_total_amount);
+                        // $('#total_rs').val(sum_total_amount);
                         toastr.success('Added to catalog', 'Success');
                         //  window.location.reload();
                         // $('#id').val(res.id);
@@ -474,19 +473,15 @@
                     }
                 }); //ajax function closed
 
+                // $('#subtotal-ajax').each(function(){
+
+                //     alert(sum_total_amount);
+                //     $('#total_rupees').val(sum_total_amount);
+                // });
+
             }); // body function closed
 
-            $( window ).on( "load", function(val) {
-               
-                // var selectednumbers = [];
-                var selectednumbers = " ";
-                // $('#subtotalsubtotal-ajax').each(function(i, subtotal) {
-                //     selectednumbers = $(subtotal).val();
-
-                //     // alert(selectednumbers);
-                //     return selectednumbers;
-                // });
-            });
+            
 
                 $('body').on('click', '.remove-from-cart-ajax', function(e) {
 

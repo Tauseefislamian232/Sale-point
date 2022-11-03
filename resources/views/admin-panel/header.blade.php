@@ -1,42 +1,28 @@
  <header id="page-topbar mb-1">
-     <div class="navbar-header">
+     <div class="navbar-header bg-light text-white text-dark ">
          <div class="d-flex">
              <!-- LOGO -->
-             <div class="navbar-brand-box sticky-top">
+             <div class="navbar-brand-box sticky-top ">
                  <a href="index.html" class="logo logo-dark">
                      <span class="logo-sm">
-                         {{-- <img src="{{asset('assets/images/logo.svg')}}" alt="" height="22"> --}}
+                        <img src="{{ asset('assets/images/logo-dark.png') }}" alt="" height="22">
                      </span>
                      <span class="logo-lg">
-                         {{-- <img src="{{asset('assets/images/logo-dark.png')}}" alt="" height="17"> --}}
+                        <img src="{{ asset('assets/images/logo-dark.png') }}" alt="" height="22">
                      </span>
                  </a>
 
                  <a href="index.html" class="logo logo-light">
                      <span class="logo-sm">
-                         <img src="{{ asset('assets/images/logo-light.svg') }}" alt="" height="22">
+                        <img src="{{ asset('assets/images/logo-dark.png') }}" alt="" height="22">
                      </span>
                      <span class="logo-lg">
-                         {{-- <img src="assets/images/logo-light.png" alt="" height="19"> --}}
-                         <img src="{{ asset('assets/images/logo3.png') }}" alt="" height="60"
-                             class="bg-white">
+                        
+                        <img src="{{ asset('assets/images/logo-dark.png') }}" alt="" height="22">
+                            
                      </span>
                  </a>
              </div>
-
-             <button type="button" class="btn btn-sm px-3 font-size-16 header-item waves-effect"
-                 id="vertical-menu-btn">
-                 <i class="fa fa-fw fa-bars"></i>
-             </button>
-
-             <!-- App Search-->
-             {{-- <form class="app-search d-none d-lg-block">
-                 <div class="position-relative">
-                     <input type="text" class="form-control" placeholder="Search...">
-                     <span class="bx bx-search-alt"></span>
-                 </div>
-             </form> --}}
-
 
          </div>
 
