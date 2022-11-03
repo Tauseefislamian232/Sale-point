@@ -392,9 +392,9 @@
                     },
                     success: function(res) {
                         // console.log(res.id+res.product_id);
+                        total_amount =0 ;
                         $.each(res, function(key, value) {
-                            total +=  value.sub_total;
-                            alert(total);
+                            
                             html += '<tr data-id="' + value.product_id + '">';
                             html += '<td data-th="Product">';
                             html += '<div class="row">';
@@ -454,13 +454,13 @@
                             html += '<td data-th="Subtotal" class="text-center">';
                             html += value.price * value.quantity;
                             html +=
-                                '<input type="hidden" name="subtotal[]" id="subtotal-ajax" value="' +
-                                value.sub_total + '">';
+                                '<input type="text" name="subtotal[]" id="subtotal-ajax" value="' +
+                                value.price * value.quantity + '">';
                             html += '</td>';
                             html += '<td class="actions" data-th="">';
                             html +=
                                 '<button class="btn btn-danger btn-sm remove-from-cart-ajax" data-id1="' +
-                                value.id + '"><i class="fa fa-trash-o"></i></button>';
+                                value.id + '"><i class="fa fa-trash-o"></i></button><input type="text" name="total_amount" value="total_amount">';
                             // '<button class="btn btn-danger btn-sm remove-from-cart-ajax"><i class="fa fa-trash-o"></i></button>';
                             html += '</td>';
                             html += '</tr>';
