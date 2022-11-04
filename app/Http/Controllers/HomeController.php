@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Product;
+use App\Models\Category;
 use Illuminate\Http\Request;
 use Illuminate\Foundation\Auth\User;
 
@@ -22,12 +24,16 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
-    public function index()
+    
+    public function index($id=null)
     {
-        // dd(1);
-        return view('admin-panel.index');
-
-        // return view('home');
+        $products = Product::all();
+        // dd($products);
+        $category = Category::all();
+        $records = Product::where('cat_id', $id)->get();
+        // dd($records);
+        // return view('admin-panel.index');
+        return view('admin-panel.products.product_listing', compact('products', 'category', 'records'));
     }
     public function profile($id)
     {
