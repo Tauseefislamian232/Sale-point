@@ -26,7 +26,7 @@
                            <li><a href="{{ route('subcat-list') }}" key="t-products">SubCategory List</a></li>
                            <li><a href="{{ route('add-product') }}" key="t-products">Add Product</a></li>
                            <li><a href="{{ route('product-listing') }}" key="t-products">Product Listing</a></li>
-                           <li><a href="{{ route('demo-listing') }}" key="t-products">Demo</a></li>
+                           {{-- <li><a href="{{ route('demo-listing') }}" key="t-products">Demo</a></li> --}}
                        </ul>
                    </li>
                    <li>

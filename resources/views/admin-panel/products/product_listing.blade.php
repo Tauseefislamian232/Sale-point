@@ -1,5 +1,27 @@
-@extends('admin-panel.full_view')
+@extends('admin-panel.master')
 
+<style>
+   .o-hidden {
+    overflow:hidden;
+}
+
+.nav {
+    transition: transform 0.4s;
+    transform: translateX(50%);
+    left: -50%;
+}
+
+.nav.justify-content-end {
+    transform: translateX(0);
+    left: 0;
+}
+</style>
+<script>
+    $('.toggle').click(function(){
+    $('.nav').toggleClass("justify-content-end");
+    $('.toggle').toggleClass("text-light");
+});
+</script>
 @section('content')
 
     <div class="container-fluid">
@@ -158,8 +180,35 @@
 
             <div class="col-md-6">
                 <div class="card">
-                    <div class="card-body overflow-auto" style="height:435px;">
-                        <ul class="nav nav-tabs nav-tabs-custom nav-justified" role="tablist">
+
+                    <div class="container">
+                        <div class="d-flex align-items-center">
+                            <div class="flex-shrink-0">
+                                <a href="#" class="btn-left btn-link p-2 toggle text-dark"><i class="fa fa-arrow-left"></i></a>
+                            </div>
+                            <div class="flex-grow-1 w-100 o-hidden">
+                                <ul class="nav nav-fill text-uppercase small position-relative flex-nowrap">
+                                    
+                                    <li class="nav-item">
+                                        <a href="#" class="nav-link">All Products</a>
+                                    </li>
+                                    @foreach ($category as $row)
+                                    <li class="nav-item">
+                                        <a href="#" class="nav-link" role="tab" data-bs-toggle="tab"
+                                        href="{{ url('product-listing/' . $row->id) }}" id="#home1" >{{ $row->name }}</a>
+                                    </li>
+                                    @endforeach
+                                    
+                                </ul>
+                            </div>
+                            <div class="flex-shrink-0">
+                                <a href="#" class="btn-right btn-link toggle p-2 text-dark"><i class="fa fa-arrow-right"></i></a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card-body overflow-auto" style="height:415px;">
+                        {{-- <ul class="nav nav-tabs nav-tabs-custom nav-justified" role="tablist">
                             <li class="nav-item">
                                 <a class="nav-link active" data-bs-toggle="tab" href="#" role="tab">
                                     <span class="d-block d-sm-none"><i class="fas fa-home"></i></span>
@@ -176,32 +225,32 @@
                                     </a>
                                 </li>
                             @endforeach
-                        </ul>
+                        </ul> --}}
 
                         <!-- Tab panes -->
                         <div class="tab-content p-3 text-muted">
                             <div class="tab-pane active" id="home1" role="tabpanel">
                                 <div class="row">
                                     <div class="col-md-12">
-                                        <p class="text-center text-primary text-bold mt-1">
+                                        {{-- <p class="text-center text-primary text-bold mt-1">
                                             Sides Section
-                                        </p>
+                                        </p> --}}
                                     </div>
 
                                     @if ($products->count() > 0)
                                         @foreach ($products as $item)
                                             <div class="col-md-2 border order-2 order-lg-1 mt-lg-0 mb-1"
-                                                {{-- data-aos="fade-up" data-aos-delay="100" --}}>
+                                                >
                                                 <p class="position-static text-left bold">{{ $item->name }}
                                                 </p>
                                                 <a href="#" class="continue" id="add-to-cart"
                                                     data-id="{{ $item->id }}">
-                                                    {{-- <a href="{{ route('add.to.cart', $item->id) }}"> --}}
+                                                  
                                                     <img src="{{ asset('uploads/products/' . $item->image->image) }}"
                                                         alt="" class="img-fluid rounded" width="80%">
                                                 </a>
                                                 <p class="text-left">
-                                                    {{-- <strong>Price:</strong> --}}
+                                                 
                                                     Rs.{{ $item->price }}</p>
                                             </div>
                                         @endforeach
@@ -269,6 +318,8 @@
                                     mustache readymade keffiyeh craft.
                                 </p>
                             </div>
+
+                           
                         </div>
 
                     </div>
@@ -276,7 +327,7 @@
             </div>
         </div>
 
-        {{-- second row --}}
+       
         <div class="row">
             <div class="col-md-12">
                 <div class="card">
@@ -284,8 +335,9 @@
                         <!--write your code here  -->
                         <div class="row">
                             <div class="col-md-2">
-                                <label for="">Logged in User: <code
-                                        class="text-uppercase">{{ Auth::User()->name }}</code> </label>
+                                <label for="">Logged In: <code
+                                        class="text-uppercase">{{ Auth::User()->name }}</code> </label><br>
+                                        <a href="{{route('settings')}}" class="text-center p-2" >Settings</a>
                             </div>
                             <div class="col-md-2">
                                 <label class="" for="">Discount: in <code>%</code></label>
@@ -309,7 +361,7 @@
 
                             <div class="col-md-4 ">
                                 <td colspan="5" class="text-right">
-                                    {{-- <label for="">More Shopping:</label><br> --}}
+                                 
                                     <a href="{{ url('product-listing') }}" class="btn btn-warning"><i
                                             class="fa fa-angle-right text-white"></i> Hold Shopping</a>
                                     <button type="submit" class="btn btn-success"><i class="fa fa-angle-right"></i>

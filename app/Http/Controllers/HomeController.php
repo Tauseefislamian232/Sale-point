@@ -30,6 +30,7 @@ class HomeController extends Controller
         $products = Product::all();
         // dd($products);
         $category = Category::all();
+        // dd($category);
         $records = Product::where('cat_id', $id)->get();
         // dd($records);
         // return view('admin-panel.index');
@@ -41,4 +42,14 @@ class HomeController extends Controller
         $data = User::find($id);
         return view('admin-panel.users.profile', compact('data'));
     }
+
+    public function settings(){
+
+        $products = Product::all();
+        // dd($products);
+        $category = Category::all();
+        // dd($category);
+        return view('admin-panel.settings.settings', compact('products', 'category'));
+    }
+
 }

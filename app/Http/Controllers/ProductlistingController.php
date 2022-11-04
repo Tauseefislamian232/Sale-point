@@ -10,10 +10,7 @@ use phpDocumentor\Reflection\Types\Null_;
 
 class ProductlistingController extends Controller
 {
-    public function demo_listing()
-    {
-        return view('admin-panel.products.demo_listing');
-    }
+   
     public function product_listing($id = NULL)
     {
         $products = Product::all();
