@@ -171,6 +171,24 @@
                         </div>
                     </div>
                     <!--2nd row -->
+                    <div class="row">
+                        <div class="col-4 col-md-4 col-lg-2">
+                            <div class="card">
+                                <img src="{{ asset('assets/images/icons8-user-64.png') }}" alt="Card image cap" width="100%">
+                                <div class="card-body">
+                                    <p class="card-text text-center font-weight-bold">Admin Registration</p>
+                                </div>
+                                <div class="card-footer">
+                                    <button class="btn btn-success btn-sm btn-rounded waves-effect waves-light"
+                                        data-bs-toggle="modal" data-bs-target=".user-registration-modal">Add
+                                    </button>
+                                    <a href="{{ route('add-admin') }}"
+                                        class="btn btn-primary btn-sm btn-rounded waves-effect waves-light">
+                                        View List</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
 
                 </div>
