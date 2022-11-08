@@ -18,12 +18,12 @@ aria-labelledby="transaction-detailModalLabel" aria-hidden="true">
 
                     </thead>
                     <tbody>
-                        <form id="form1" novalidate method="POST" action="{{ route('store-admin') }}"
+                        <form id="form_user_registration" novalidate method="POST" action="{{ route('store-admin') }}"
                             enctype="multipart/form-data">
                             @csrf
                             <div class="mb-3">
-                                <label for="username" class="form-label">Username</label>
-                                <input type="text" id="username" placeholder="Enter username" required
+                                <label for="username8" class="form-label">Username</label>
+                                <input type="text" id="username8" placeholder="Enter username" required
                                     class="form-control @error('name') is-invalid @enderror" name="name"
                                     value="{{ old('name') }}" required autocomplete="name" autofocus>
 
@@ -35,8 +35,8 @@ aria-labelledby="transaction-detailModalLabel" aria-hidden="true">
                             </div>
 
                             <div class="mb-3">
-                                <label for="useremail" class="form-label">Email</label>
-                                <input type="email" id="useremail" placeholder="Enter email"
+                                <label for="useremail8" class="form-label">Email</label>
+                                <input type="email" id="useremail8" placeholder="Enter email"
                                     class="form-control @error('email') is-invalid @enderror" name="email"
                                     value="{{ old('email') }}" autocomplete="email" required>
 
@@ -104,9 +104,9 @@ aria-labelledby="transaction-detailModalLabel" aria-hidden="true">
                                     </span>
                                 @enderror
                             </div>
-                            <button type="submit" form="form1" class="btn btn-primary " id="modal_submit"
+                            <button type="submit" form="form_user_registration" class="btn btn-primary " id="modal_submit8"
                                 value="Submit">Submit</button>
-                            <button type="button" class="btn btn-secondary" id="modal_close"
+                            <button type="button" class="btn btn-secondary" id="modal_close8"
                                 data-bs-dismiss="modal">Close</button>
                         </form>
                     </tbody>

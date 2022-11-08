@@ -23,8 +23,8 @@
                              @csrf
                             
                                  <div class="col-md-12 mb-3">
-                                     <label for="username" class="form-label">Product Title</label>
-                                     <input type="text" id="username" placeholder="Enter Product title" required
+                                     <label for="username1" class="form-label">Product Title</label>
+                                     <input type="text" id="username1" placeholder="Enter Product title" required
                                          class="form-control @error('name') is-invalid @enderror" name="name"
                                          value="{{ old('name') }}" required autocomplete="name" autofocus>
 
@@ -62,7 +62,7 @@
                                  </div>
                              
                                  <div class="col-md-12 mb-3">
-                                     <label for="username" class="form-label">Price</label>
+                                     <label for="username2" class="form-label">Price</label>
                                      <input type="number" id="price" placeholder="Enter Product's Price"
                                          required class="form-control @error('price') is-invalid @enderror"
                                          name="price" value="{{ old('price') }}" required autocomplete="name"
@@ -76,7 +76,7 @@
                                  </div>
 
                                  <div class="col-md-12 mb-3">
-                                     <label for="username" class="form-label">Quantity</label>
+                                     <label for="username3" class="form-label">Quantity</label>
                                      <input type="number" id="quantity" placeholder="Enter quantity Number"
                                          required class="form-control @error('name') is-invalid @enderror"
                                          name="quantity" value="{{ old('quantity') }}" required
@@ -91,7 +91,7 @@
                             
                              
                                  <div class="col-md-12 mb-3">
-                                     <label for="username" class="form-label">Choose Product type</label>
+                                     <label for="username4" class="form-label">Choose Product type</label>
                                      <div class="control">
                                          <label class="radio m-lg-3">
                                              <input type="radio" name="is_drink" value="0" checked>
@@ -115,7 +115,7 @@
                                  </div>
                             
                                  <div class="col-md-12 mb-3">
-                                     <label for="username" class="form-label">Product Image</label>
+                                     <label for="username5" class="form-label">Product Image</label>
                                      <input type="file" id="image" placeholder="Enter username" required
                                          class="form-control @error('image') is-invalid @enderror" name="image"
                                          autocomplete="image" autofocus>
@@ -128,9 +128,9 @@
                                  </div>
                              
                              <div class="form-group mt-2">
-                                 <button type="submit" form="form1" class="btn btn-primary" id="modal_submit"
+                                 <button type="submit" form="form1" class="btn btn-primary" id="modal_submit1"
                                      value="Submit">Submit</button>
-                                 <button type="button" class="btn btn-secondary" id="modal_close"
+                                 <button type="button" class="btn btn-secondary" id="modal_close1"
                                      data-bs-dismiss="modal">Close</button>
 
                              </div>

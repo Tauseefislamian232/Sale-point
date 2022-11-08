@@ -8,7 +8,7 @@
                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
              </div>
              <div class="modal-body">
-                 <form id="product-category-form" class="needs-validation" novalidate
+                 <form id="form_product_category" class="needs-validation" novalidate
                      action="{{ route('store-category') }}" method="POST">
                      @csrf
 
@@ -22,8 +22,8 @@
 
 
                      <button type="submit" form="form_product_category" class="btn btn-primary "
-                         id="product-category-form" value="Submit">Submit</button>
-                     <button type="button" class="btn btn-secondary m-2" id="product-category-form"
+                         id="product-category-form12" value="Submit">Submit</button>
+                     <button type="button" class="btn btn-secondary m-2" id="product-category-form13"
                          data-bs-dismiss="modal">Close</button>
                  </form>
 

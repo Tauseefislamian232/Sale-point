@@ -18,7 +18,7 @@
 
                      </thead>
                      <tbody>
-                         <form id="form_product_category" novalidate method="POST"
+                         <form id="form_payment_method" novalidate method="POST"
                              action="{{ route('store-payment-method') }}" enctype="multipart/form-data">
                              @csrf
                              <div class="mb-3">
@@ -106,10 +106,10 @@
                                    </span>
                                @enderror
                            </div> --}}
-                             <button type="submit" form="form_product_category" class="btn btn-primary "
-                                 id="modal_submit_product_category" value="Submit">Submit</button>
+                             <button type="submit" form="form_payment_method" class="btn btn-primary "
+                                 id="form_payment_method12" value="Submit">Submit</button>
                              <button type="button" class="btn btn-secondary m-2"
-                                 id="modal_close_product_category" data-bs-dismiss="modal">Close</button>
+                                 id="form_payment_method13" data-bs-dismiss="modal">Close</button>
                          </form>
                      </tbody>
                  </table>

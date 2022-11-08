@@ -25,8 +25,8 @@
                         </div>
 
                         <button type="submit" form="form_product_subcategory" class="btn btn-primary "
-                            id="product-category-form" value="Submit">Submit</button>
-                        <button type="button" class="btn btn-secondary m-2" id="product-category-form"
+                            id="product-category-form14" value="Submit">Submit</button>
+                        <button type="button" class="btn btn-secondary m-2" id="product-category-form15"
                             data-bs-dismiss="modal">Close</button>
                 </form>
 
