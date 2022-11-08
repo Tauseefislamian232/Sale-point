@@ -77,8 +77,8 @@
                                                 <td data-th="Product">
                                                     <div class="row">
                                                         <div class="col hidden-xs">
-                                                            <img src="{{ asset('uploads/products/' . $details['image']['image']) }}"
-                                                                width="50" height="50" class="img-responsive" />
+                                                            {{-- <img src="{{ asset('uploads/products/' . $details['image']['image']) }}"
+                                                                width="50" height="50" class="img-responsive" /> --}}
                                                         </div>
                                                         <div class="col">
                                                             <h6 class="nomargin">
