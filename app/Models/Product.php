@@ -26,7 +26,7 @@ class Product extends Model
     {
         return $this->belongsTo(Subcategory::class, 'subcat_id', 'id');
     }
-    public function image()
+    public function product_with_image()
     {
         return $this->hasOne(ProductImage::class, 'product_id', 'id');
     }

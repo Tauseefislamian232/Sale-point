@@ -246,7 +246,7 @@
                                                 <a href="#" class="continue" id="add-to-cart"
                                                     data-id="{{ $item->id }}">
                                                   
-                                                    <img src="{{ asset('uploads/products/' . $item->image->image) }}"
+                                                    <img src="{{ asset('uploads/products/' . $item->product_with_image->image) }}"
                                                         alt="" class="img-fluid rounded" width="80%">
                                                 </a>
                                                 <p class="text-left">

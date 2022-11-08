@@ -1,10 +1,10 @@
-@extends('admin-panel.index')
+@extends('admin-panel.master')
 
 @section('content')
 
-    <div class=" bg-light  pt-4 px-4">
+    <div class=" bg-light">
         {{-- style="background-image: url('{{ asset('assets/images/bg-image.jpg') }}'); height: 100vh; background-position: center; background-repeat: no-repeat; background-size: cover; padding-bottom:50px"> --}}
-        <div class="container" style="margin-top: 70px; ">
+        <div class="container">
             <!-- start page title -->
             <div class="row">
                 <div class="col">
@@ -16,8 +16,8 @@
                                     <div class="row">
                                         <div class="col-8">
                                             <div class="text-primary p-3">
-                                                <h5 class="text-primary">Welcome Back !</h5>
-                                                <p>User Profile Information</p>
+                                                <h3 class="text-primary">Welcome Back !</h3>
+                                                <h5>User Profile Information</h5>
                                             </div>
                                         </div>
                                         <div class="col-4 align-self-end">
@@ -29,15 +29,15 @@
                                 <div class="card-body pt-0">
                                     <div class="row">
                                         <div class="avatar-md profile-user-wid mb-4 cover">
-                                            <img src="{{ asset('assets/images/users/admin.png') }}" alt=""
-                                                class="img-thumbnail rounded-circle">
+                                            <img src="{{ asset('assets/images/icons8-user-100.png') }}" alt=""
+                                                class="img-thumbnail rounded-circle" >
                                         </div>
-                                        <h5 class="font-size-15 text-truncate">{{ $data->name }}</h5>
+                                        {{-- <h5 class="font-size-15 text-truncate">{{ $data->name }}</h5>
 
-                                        <p class="text-muted mb-0 text-truncate">{{ $data->email }}</p>
+                                        <p class="text-muted mb-0 text-truncate">{{ $data->email }}</p> --}}
 
-                                        <h4 class="card-title mb-1 mt-3">Personal Information</h4>
-                                        <div class="pt-4">
+                                        <h4 class="card-title ">Personal Information</h4>
+                                        <div class="pt-2">
                                             <table class="table table-nowrap mb-0">
                                                 <tbody>
                                                     <tr>
@@ -58,7 +58,7 @@
                                                     </tr>
                                                 </tbody>
                                             </table>
-                                            <div class="mt-4 justify-content-center">
+                                            <div class="mt-2 justify-content-center">
                                                 <a href="{{ route('home') }}"
                                                     class="btn btn-dark btn-md text-white btn-sm">Dashboard </a>
                                                 <a href="javascript: void(0);"
@@ -172,7 +172,7 @@
                                                                         </span>
                                                                     @endif
                                                                 </div>
-                                                                
+
                                                             </div>
 
                                                             <div class="form-group">
@@ -185,7 +185,7 @@
                                                                         class="form-control"
                                                                         name="new-password_confirmation" required>
                                                                 </div>
-                                                               
+
                                                             </div>
 
 
@@ -331,11 +331,12 @@
                                                         <div
                                                             class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
                                                             <label for="name" class="col-md-12 control-label">Full
-                                                                Name: <span class="text-muted">{{$data->name}}</span></label>
+                                                                Name: <span
+                                                                    class="text-muted">{{ $data->name }}</span></label>
 
                                                             <div class="col-md-12 mb-3">
-                                                                <input type="text" placeholder=""
-                                                                    class="form-control" name="name" required>
+                                                                <input type="text" placeholder="" class="form-control"
+                                                                    name="name" required>
                                                                 <input type="hidden" name="id"
                                                                     value="{{ $data->id }}">
                                                                 @if ($errors->has('name'))
@@ -349,11 +350,12 @@
                                                         <div
                                                             class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
                                                             <label for="email" class="col-md-12 control-label">User
-                                                                Email:<span class="text-muted">{{$data->email}}</span></label>
+                                                                Email:<span
+                                                                    class="text-muted">{{ $data->email }}</span></label>
 
                                                             <div class="col-md-12 mb-3">
-                                                                <input type="text" placeholder=""
-                                                                    class="form-control" name="email" required>
+                                                                <input type="text" placeholder="" class="form-control"
+                                                                    name="email" required>
 
                                                                 @if ($errors->has('email'))
                                                                     <span class="help-block">

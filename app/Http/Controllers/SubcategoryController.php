@@ -13,7 +13,8 @@ class SubcategoryController extends Controller
     public function add_subcategory($id)
     {
         $data = Category::find($id);
-        return view('admin-panel.categories.create_subcategory', compact('data'));
+
+        return view('admin-panel.settings.categories.subcategory_list', compact('data'));
     }
     public function store_subcategory(Request $request, $id = NULL)
     {
@@ -47,7 +48,7 @@ class SubcategoryController extends Controller
         // dd($data);
         $category = DB::table('categories')->pluck('name', 'id');
 
-        return view('admin-panel.categories.edit_subcategory', compact('data', 'category'));
+        return view('admin-panel.settings.categories.edit_subcategory', compact('data', 'category'));
     }
     public function update_subcategory(Request $request, $id)
     {
@@ -92,7 +93,7 @@ class SubcategoryController extends Controller
 
         $data = Category::find($id);
 
-        return view('admin-panel.categories.fetch_subcategory', compact('data'));
+        return view('admin-panel.settings.categories.fetch_subcategory', compact('data'));
     }
 
     //catsubcat list

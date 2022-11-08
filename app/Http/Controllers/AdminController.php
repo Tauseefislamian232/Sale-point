@@ -18,7 +18,7 @@ class AdminController extends Controller
         // dd($month);
         // $month = date('d/m/Y', strtotime($payment->created_at));
         // dd($month);
-        return view('admin-panel.admins.create_admin', compact('data'));
+        return view('admin-panel.settings.admins.user_list', compact('data'));
     }
     public function store_admin(Request $request)
     {

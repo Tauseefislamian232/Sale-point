@@ -8,6 +8,7 @@ use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CustomerController;
+use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\SubcategoryController;
 use App\Http\Controllers\ProductlistingController;
 
@@ -54,6 +55,13 @@ Route::post('/store-customer', [CustomerController::class, 'store_customer'])->n
 Route::get('edit-customer/{id}', [CustomerController::class, 'edit_customer']);
 Route::post('update-customer/{id}', [CustomerController::class, 'update_customer']);
 Route::get('delete-customer/{id}', [CustomerController::class, 'destroy_customer'])->name('delete-customer');
+
+//Customer Routes
+Route::get('/add-payment-method', [PaymentController::class, 'add_payment_method'])->name('add-payment-method');
+Route::post('/store-payment-method', [PaymentController::class, 'store_payment_method'])->name('store-payment-method');
+Route::get('edit-payment-method/{id}', [PaymentController::class, 'edit_payment_method']);
+Route::post('update-payment-method/{id}', [PaymentController::class, 'update_payment_method']);
+Route::get('delete-payment-method/{id}', [PaymentController::class, 'destroy_payment_method'])->name('delete-payment-method');
 
 //Category Routes
 Route::get('add-category', [CategoryController::class, 'add_category'])->name('add-category');

@@ -33,23 +33,26 @@ class HomeController extends Controller
         // dd($category);
         $records = Product::where('cat_id', $id)->get();
         // dd($records);
+
         // return view('admin-panel.index');
-        return view('admin-panel.products.product_listing', compact('products', 'category', 'records'));
+        return view('admin-panel.product_listing', compact('products', 'category', 'records'));
     }
     public function profile($id)
     {
         // dd(1);
         $data = User::find($id);
-        return view('admin-panel.users.profile', compact('data'));
+        return view('admin-panel.settings.users.profile', compact('data'));
     }
 
-    public function settings(){
+    public function settings($id=null){
 
         $products = Product::all();
         // dd($products);
         $category = Category::all();
         // dd($category);
-        return view('admin-panel.settings.settings', compact('products', 'category'));
+        $category_record = Category::find($id);
+        // dd($category_record);
+        return view('admin-panel.settings.settings', compact('products', 'category','category_record'));
     }
 
 }

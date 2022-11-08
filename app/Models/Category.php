@@ -14,13 +14,17 @@ class Category extends Model
     protected $guarded = [];
     protected $fillables = ['name'];
 
-    public function subcategory()
+    public function category_with_subcategory()
     {
         return $this->hasMany(Subcategory::class, 'cat_id', 'id');
     }
+    // public function subcategory()
+    // {
+    //     return $this->hasMany(Subcategory::class, 'cat_id', 'id');
+    // }
 
-    public function products()
-    {
-        return $this->hasMany(Product::class, 'cat_id', 'id');
-    }
+    // public function products()
+    // {
+    //     return $this->hasMany(Product::class, 'cat_id', 'id');
+    // }
 }

@@ -13,7 +13,7 @@ class CategoryController extends Controller
     public function add_category()
     {
         $data = Category::all();
-        return view('admin-panel.categories.create_category', compact('data'));
+        return view('admin-panel.settings.categories.category_list', compact('data'));
     }
     public function store_category(Request $request)
     {

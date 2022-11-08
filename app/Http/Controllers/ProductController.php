@@ -14,9 +14,9 @@ class ProductController extends Controller
     public function add_product()
     {
         $category = Category::all();
-        $data = Product::with('product_with_category')->get();
-        dd($data);
-        return view('admin-panel.products.create_product', compact('data', 'category'));
+        $data = Product::with('product_with_category','product_with_subcategory')->get();
+        // dd($data);
+        return view('admin-panel.settings.products.product_list', compact('data', 'category'));
     }
 
     public function getCourse($id)
@@ -69,10 +69,12 @@ class ProductController extends Controller
 
     public function edit_product($id)
     {
-        $data = Product::find($id);
+        $data = Product::with('product_with_image')->find($id);
+        // dd($data);
         $category = Category::all();
+        // dd($category);
 
-        return view('admin-panel.products.edit_product', compact('data', 'category'));
+        return view('admin-panel.settings.products.edit_product', compact('data', 'category'));
     }
 
     public function update_product(Request $request, $id)
